@@ -1,0 +1,349 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+:root{
+    background-color: rgb(0, 0, 0);
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(9, 255, 0);
+    width: 100%;
+    height: fit-content;
+    /* position: fixed;
+    z-index: 1; */
+}
+.logo {
+    width: 90px;
+    height: auto;
+}
+.logo img {
+    width: 90px;
+}
+.socieux {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 500px;
+}
+.socieux .login {
+    width: 210px;
+    display: flex;
+    justify-content: space-between;
+}
+.socieux .login .login-in h3 {
+    text-align: center;
+}
+.menu ul {
+    width: 500px;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.menu ul li {
+    list-style-type: none;
+}
+.menu ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+
+#container{
+    width: 100%;
+    height: fit-content;
+    height: 700px;
+}
+#playerReserve{
+    width: 100%;
+    height: 260px;
+    --g: 4px; 
+    --b: 12px;
+    --c: #669706;
+    padding: calc(var(--g) + var(--b));
+        --_c: #00000000 0 25%, var(--c) 0 50%;
+    --_g1: repeating-linear-gradient(90deg ,var(--_c)) repeat-x;
+    --_g2: repeating-linear-gradient(180deg,var(--_c)) repeat-y;
+    background:
+        var(--_g1) var(--_p, 25%) 0   ,var(--_g2) 0    var(--_p,125%),
+        var(--_g1) var(--_p,125%) 100%,var(--_g2) 100% var(--_p, 25%);
+    background-size: 200% var(--b),var(--b) 200%;
+    cursor: pointer;
+    filter: grayscale(50%);
+    transition: .3s;
+    background-color: black;
+    display: flex;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+#playerReserve:hover {
+    --_p: 75%;
+    filter: grayscale(0%);
+    --c: #ff7b00;
+}
+.content{
+    width:100%;
+    height: 710px;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    bottom: 720px;
+}
+.content .squad-field{
+    width: 850px;
+    display: flex;
+    background: url('/My_Frontend/src/assets/images/FUT-feild-Photoroom.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+    opacity: 0.8;
+    margin-top: 9px;
+}
+.content .squad-field .field_card{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    margin: 20px;
+}
+.content .squad-field .field_card .allCards{
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(/My_Frontend/src/assets/images/Borde1-plus-.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    filter: grayscale(50%);
+    cursor: pointer;
+}
+.draggable-item {
+    cursor: move;
+}
+.drop-zone {
+    display: flex;
+}
+.content .squad-field .field_card .allCards img{
+    width: 60px;
+}
+.content .squad-field .field_card .allCards:hover{
+    filter: grayscale(0%);
+    transform: translateY(-10px);
+}
+.content .Reserve-field{
+    width: 400px;
+    margin-top: 20px;
+}
+.content .Reserve-field .form{
+    width: 370px;
+    height: 680px;
+    margin-left: 20px;
+    background-color: rgb(0, 0, 0);
+    overflow-y: scroll;
+    opacity: 0.8;
+    scrollbar-width: none;
+}
+.content .Reserve-field .form .picArea{
+    background-color: rgb(49, 48, 47);
+    width: 300px;
+    margin-left: 25px;
+}
+.content .Reserve-field .form .playerPointsArea{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+.content .Reserve-field .form .submitArea{
+    display: flex;
+    justify-content: center;
+}
+.content .Reserve-field .form .submitArea .btn:hover{
+    background-color: rgb(11, 59, 11);
+}
+#placement{
+    --g: 4px; 
+    --b: 12px;
+    --c: #669706;
+    padding: calc(var(--g) + var(--b));
+        --_c: #00000000 0 25%, var(--c) 0 50%;
+    --_g1: repeating-linear-gradient(90deg ,var(--_c)) repeat-x;
+    --_g2: repeating-linear-gradient(180deg,var(--_c)) repeat-y;
+    background:
+        var(--_g1) var(--_p, 25%) 0   ,var(--_g2) 0    var(--_p,125%),
+        var(--_g1) var(--_p,125%) 100%,var(--_g2) 100% var(--_p, 25%);
+    background-size: 200% var(--b),var(--b) 200%;
+    cursor: pointer;
+    filter: grayscale(50%);
+    transition: .3s;
+    height: 270px;
+    background-color: #000000;
+    position: relative;
+    bottom: 710px;
+    display: flex;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+#placement:hover{
+    --_p: 75%;
+    filter: grayscale(0%);
+    --c: #ff7b00;
+}
+hr {
+    border: 1; 
+    height: 1px; 
+    background-color: #4a5568;
+    margin: 24px 0;
+}
+#successMessage {
+    font-size: 14px;
+    font-weight: 500;
+    color: green;
+    background-color: #e6f4ea;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+footer{
+    height:fit-content;
+    position: relative;
+    top: 540px;
+    background-color: rgb(0, 0, 0);
+    border-top: 1px solid rgb(9, 255, 0);
+}
+.container-footer{
+    display: flex;
+    justify-content: space-around;
+}
+.container-footer .EAFC25, .trackers, .tools, .misc{
+    display: flex;
+    flex-direction: column;
+    justify-content:safe;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.container-footer .EAFC25 ul li , .trackers ul li , .tools ul li , .misc ul li{
+    list-style-type: none;
+    margin-top: 10px;
+}
+.container-footer .EAFC25 ul li a , .trackers ul li a , .tools ul li a , .misc ul li a{
+    text-decoration: none;
+    color: white;
+    font-family:sans-serif;
+    font-size: small;
+}
+.container-footer .EAFC25 h2 , .trackers h2 , .tools h2 , .misc h2{
+    color: white;
+    font-family: sans-serif;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 1024px) {
+    .content .squad-field {
+        width: 700px;
+        position: relative;
+        top: 140px;
+        left: 20px;
+    }
+    .content .squad-field .field_card{
+        width: 200px;
+        height: 500px;
+        position: relative;
+        left: 40px;
+    }
+    .content .squad-field .field_card .allCards {
+        width: 100px;
+    }
+    
+    .content .Reserve-field{
+        position: relative;
+        right: 170px;
+    }
+    .content .Reserve-field .form{
+        width: 300px;
+        height: 500px;
+        position: relative;
+        top: 160px;
+        left: 200px;
+    }
+}
+@media (max-width: 768px) {
+    header .menu{
+        width: 20px;
+        position: relative;
+        right: 310px;
+    }
+    header .socieux{
+        width: 20px;
+        position: relative;
+        right: 200px;
+        img{
+            display: none;
+        }
+    }
+    .content .squad-field{
+        width: 900px;
+        position: relative;
+        top: 300px;
+    }
+    .content .squad-field .field_card{
+        height: 200px;
+    }
+    .content .squad-field .field_card .allCards{
+        width: 60px;
+    }
+    .content .Reserve-field .form{
+        width: 220px;
+        height: 400px;
+        margin-right: 40px;
+        margin-top: 130px;
+    }
+}
+@media (max-width: 480px) {
+    header .menu{
+        display: none;
+    }
+    header .socieux span{
+        display: none;
+    }
+    header .socieux .login{
+        display: none;
+    }
+    header .logo{
+        margin-left: 190px;
+    }
+    #playerReserve{
+        height: 230px;
+    }
+    #placement{
+        height: 230px;
+    }
+    .content .squad-field{
+        width: 450px;
+        height: 600px;
+        position: relative;
+        top: 450px;
+    }
+    .content .squad-field .field_card{
+        width: 40px;
+        height: 200px;
+    }
+    .content .squad-field .field_card .allCards{
+        width: 40px;
+    }
+    .content .Reserve-field .form{
+        width: 120px;
+        height: 250px;
+        position: relative;
+        top: 310px;
+        left: 235px;
+    }
+}
