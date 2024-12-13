@@ -41,3 +41,4 @@ create table normal_player(
     playerID int,
     FOREIGN KEY (playerID) REFERENCES player(id)
 );
+

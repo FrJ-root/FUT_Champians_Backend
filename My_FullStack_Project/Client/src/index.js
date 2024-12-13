@@ -1,7 +1,7 @@
 const playersNenber = JSON.parse(localStorage.getItem('players')) || [];
 const players = JSON.parse(localStorage.getItem('players')) || [];
 let playerReserve = document.getElementById("playerReserve");
-const urlJson = "../../My_Backend/package.json"
+const urlJson = "../../Server/package.json"
 
 fetch(urlJson)
 .then(response => response.json())
@@ -9,11 +9,11 @@ fetch(urlJson)
     const data = res.players;
     let playerReserve = '';
     data.forEach(player=>{
-        playerReserve+=`<div id="card" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)" style="width: 500px;
+        playerReserve+=`<div id="card" style="width: 500px;
                             display: flex;
                             flex-direction: column;
                             align-items: center;
-                            background-image: url(/My_Frontend/src/assets/images/Borde1.png);
+                            background-image: url(/My_FullStack_Project/Client/src/assets/images/Borde1.png);
                             background-size: 100%;
                             background-repeat: no-repeat;
                             color: white;
@@ -266,57 +266,6 @@ function getFromLocal() {
                         });
                     });
 }
-
-
-function counterPlayers(){
-    const players = document.querySelector("#placement");
-     let arr = [players.length];
-}
-console.log(counterPlayers());
-
-
-
-
-// -------------Drag & Drop---------------
-
-
-
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
-function drop(ev) {
-    ev.preventDefault();
-    let data = ev.dataTransfer.getData("text");
-    let draggedElement = document.getElementById(data);
-    let targetElement = ev.target;
-    let targetCoord = targetElement.getBoundingClientRect();
-    draggedElement.style.position = "relative";
-    draggedElement.style.top = `${targetCoord.top}`;
-    draggedElement.style.left = `${targetCoord.left}`;
-    draggedElement.style.width = "160px";
-    targetElement.parentNode.replaceChild(draggedElement, targetElement);
-}
-function dragDisplayMessage(message) {
-    const messageBox = document.createElement("div");
-    messageBox.innerText = message;
-    messageBox.style.position = "fixed";
-    messageBox.style.top = "20px";
-    messageBox.style.right = "20px";
-    messageBox.style.backgroundColor = "red";
-    messageBox.style.color = "white";
-    messageBox.style.padding = "10px 20px";
-    messageBox.style.borderRadius = "5px";
-    messageBox.style.zIndex = "1000";
-    document.body.appendChild(messageBox);
-    setTimeout(() => {
-        document.body.removeChild(messageBox);
-    }, 3000);
-}
-
 
 
 

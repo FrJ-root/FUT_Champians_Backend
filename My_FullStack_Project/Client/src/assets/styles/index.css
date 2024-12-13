@@ -13,8 +13,6 @@ header {
     border-bottom: 1px solid rgb(9, 255, 0);
     width: 100%;
     height: fit-content;
-    /* position: fixed;
-    z-index: 1; */
 }
 .logo {
     width: 90px;
@@ -96,7 +94,7 @@ header {
 .content .squad-field{
     width: 850px;
     display: flex;
-    background: url('/My_Frontend/src/assets/images/FUT-feild-Photoroom.png');
+    background: url('/My_FullStack_Project/Client/src/assets/images/FUT-feild-Photoroom.png');
     background-size: 100%;
     background-repeat: no-repeat;
     margin-left: 10px;
@@ -115,7 +113,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url(/My_Frontend/src/assets/images/Borde1-plus-.png);
+    background-image: url(/My_FullStack_Project/Client/src/assets/images/Borde1-plus-.png);
     background-size: 100%;
     background-repeat: no-repeat;
     filter: grayscale(50%);
