@@ -38,17 +38,8 @@
                 <img src="/My_FullStack_Project/Client/src/assets/images/FUT_discord.png" alt
                     style="width: 30px;">
                 <span style="color: white;">|</span>
-                <div class="login">
-                    <div class="login-in">
-                        <h3
-                            style="background-color: rgb(54, 54, 54); color:white; text-align: center; width: 100px; height: 30px; border-radius: 5px; font-size: 15px;">Log
-                            In</h3>
-                    </div>
-                    <div class="login_up">
-                        <h3
-                            style="background-color: rgb(255, 0, 0); color:white; text-align: center; width: 100px; height: 30px; border-radius: 5px; font-size: 15px;">Sign
-                            Up</h3>
-                    </div>
+                <div class="dashboard">
+                        <a href="/My_FullStack_Project/Client/src/pages/dashbord.html"><h3 style="background-color: rgb(255, 0, 0); color:white; text-align: center; width: 100px; height: 30px; border-radius: 5px; font-size: 15px;">Admin</h3></a>
                 </div>
             </div>
         </header>
@@ -67,27 +58,27 @@
 
                 <section class="squad-field">
                     <div class="field_card">
-                        <div id="card1" class="allCards" data-position="CM" style="position: relative;top:190px;left:140px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="LCM" class="allCards" data-position="CM" style="position: relative;top:190px;left:140px;">
                         </div>
-                        <div id="card2" class="allCards" data-position="LW" style="position: relative;bottom:10px;right:100px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="LW" class="allCards" data-position="LW" style="position: relative;bottom:10px;right:100px;">
                         </div>
-                        <div id="card3" class="allCards" data-position="ST" style="position: relative;top:15px;right:80px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="ST" class="allCards" data-position="ST" style="position: relative;top:15px;right:80px;">
                         </div>
-                        <div id="card4" class="allCards" data-position="RW" style="position: relative;bottom:10px;right:70px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="RW" class="allCards" data-position="RW" style="position: relative;bottom:10px;right:70px;">
                         </div>
-                        <div id="card5" class="allCards" data-position="LB" style="position: relative;top:110px;right: 10px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="LB" class="allCards" data-position="LB" style="position: relative;top:110px;right: 10px;">
                         </div>
-                        <div id="card6" class="allCards" data-position="CM" style="position: relative;bottom:10px;left: 128px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="CM" class="allCards" data-position="CM" style="position: relative;bottom:10px;left: 128px;">
                         </div>
-                        <div id="card7" class="allCards" data-position="CM" style="position: relative;bottom:40px;left: 110px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="RCM" class="allCards" data-position="CM" style="position: relative;bottom:40px;left: 110px;">
                         </div>
-                        <div id="card8" class="allCards" data-position="RB" style="position: relative;top:110px;left: 45px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="RB" class="allCards" data-position="RB" style="position: relative;top:110px;left: 45px;">
                         </div>
-                        <div id="card9" class="allCards" data-position="CB" style="position: relative;bottom:60px;left: 160px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="RCB" class="allCards" data-position="CB" style="position: relative;bottom:60px;left: 160px;">
                         </div>
-                        <div id="card10" class="allCards" data-position="GK" style="position: relative;top:20px;left: 120px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="GK" class="allCards" data-position="GK" style="position: relative;top:20px;left: 120px;">
                         </div>
-                        <div id="card11" class="allCards" data-position="CB" style="position: relative;bottom: 60px;left: 80px;" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="LCB" class="allCards" data-position="CB" style="position: relative;bottom: 60px;left: 80px;">
                         </div>
                     </div>
                 </section>
@@ -286,7 +277,7 @@
 
             </div>
 
-            <div id="placement" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="placement">
             </div>
 
             <div id="editFormContainer" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 1000;">
