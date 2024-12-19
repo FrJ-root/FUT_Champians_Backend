@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/styles/add_player.css">
 </head>
 
 <body class="bg-gray-100 font-sans">
@@ -32,9 +35,8 @@
                     <li class="px-4 py-2 hover:bg-gray-700">
                         <a href="#add-player" class="flex items-center space-x-2">
                             <span>➕</span>
-                            <span>Add Player</span>
-                        </a>
-                    </li>
+                            <span id="addPlayerBtn">Add Player</span>
+                        </a>                    </li>
                 </ul>
             </nav>
         </aside>
@@ -42,13 +44,13 @@
         <main class="flex-1 p-6">
 
             <section id="dashboard" class="mb-6">
-          <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-white p-4 shadow rounded-md">
-              <h3 class="text-lg font-bold">Total Players</h3>
-              <p class="text-2xl mt-2"><?php ?></p>
-            </div>
-          </div>
+               <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 shadow rounded-md">
+                        <h3 class="text-lg font-bold">Total Players</h3>
+                        <p class="text-2xl mt-2"><?php include "/xampp/htdocs/FUT_Champians_Backend/Client/src/pages/counter.php" ?></p>
+                    </div>
+                </div>
             </section>
 
             <section id="players" class="mb-6">
@@ -64,13 +66,6 @@
                             <th class="px-4 py-2">Flag</th>
                             <th class="px-4 py-2">Club</th>
                             <th class="px-4 py-2">Logo</th>
-                            <th class="px-4 py-2">Rat</th>
-                            <th class="px-4 py-2">Pace</th>
-                            <th class="px-4 py-2">Shoot</th>
-                            <th class="px-4 py-2">Pass</th>
-                            <th class="px-4 py-2">Dribbl</th>
-                            <th class="px-4 py-2">Def</th>
-                            <th class="px-4 py-2">Phy</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,7 +74,7 @@
                 </table>
             </section>
 
-            <section id="add-player" class="mb-6">
+            <section id="add-player" class="mb-10 hidden overflow-y-auto max-h-[600px] ">
                 <h2 class="text-2xl font-bold mb-4">Add Player</h2>
                 <form id="player-form" action="add_player.php" method="post">
                     <div class="form border-b border-gray-900/10 pb-12">
@@ -326,6 +321,7 @@
 
         </main>
     </div>
+    <script src="../add_player.js"></script>
 </body>
 
 </html>
