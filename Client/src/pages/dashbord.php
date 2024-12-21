@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../assets/styles/add_player.css">
 </head>
 
 <body class="bg-gray-100 font-sans">
@@ -21,7 +20,7 @@
             <nav class="mt-6">
                 <ul>
                     <li class="px-4 py-2 hover:bg-gray-700">
-                        <a href="#dashboard" id="toggle-players" class="flex items-center space-x-2">
+                        <a href="#dashboard" class="flex items-center space-x-2">
                             <span>🏠</span>
                             <span>Dashboard</span>
                         </a>
@@ -33,10 +32,11 @@
                         </a>
                     </li>
                     <li class="px-4 py-2 hover:bg-gray-700">
-                        <a href="#add-player" class="flex items-center space-x-2">
+                        <a href="javascript:void(0)" onclick="toggleModal()" class="flex items-center space-x-2">
                             <span>➕</span>
-                            <span id="addPlayerBtn">Add Player</span>
-                        </a>                    </li>
+                            <span>Add Player</span>
+                        </a>                    
+                    </li>
                 </ul>
             </nav>
         </aside>
@@ -66,6 +66,7 @@
                             <th class="px-4 py-2">Flag</th>
                             <th class="px-4 py-2">Club</th>
                             <th class="px-4 py-2">Logo</th>
+                            <th class="px-4 py-2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,13 +75,14 @@
                 </table>
             </section>
 
-            <section id="add-player" class="mb-10 hidden overflow-y-auto max-h-[600px] ">
-                <h2 class="text-2xl font-bold mb-4">Add Player</h2>
+            <section id="add-player-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+                <div class="bg-gray-900 rounded-lg shadow-lg p-6 w-1/2" style="width: 38rem;; height: 600px; overflow: scroll; scrollbar-width: none;">
+                <h2 class="text-3xl font-bold mb-4 text-center text-white">Add Player</h2>
                 <form id="player-form" action="add_player.php" method="post">
                     <div class="form border-b border-gray-900/10 pb-12">
 
                         <div class="name sm:col-span-4">
-                            <label for="name" class="block text-sm/6 font-medium text-black mt-2 ml-2">-> Name</label>
+                            <label for="name" class="block text-sm/6 font-medium text-white mt-2 ml-2">-> Name</label>
                             <div class="form-name mt-2" style="width: 320px; margin-left: 15px;padding-bottom: 20px;">
                                   <div class="flex rounded-md bg-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                       <input type="text" name="name" id="name"
@@ -93,7 +95,7 @@
 
                         <div class="photo col-span-full flex items-center space-x-10">
                                 <div>
-                                    <label for="photo" class="block text-sm font-medium text-black ml-2 mb-7">
+                                    <label for="photo" class="block text-sm font-medium text-white ml-2 mb-7">
                                         -> Photo
                                     </label>
                                     <div class="ml-4 mb-7">
@@ -115,7 +117,7 @@
                         <hr class="border-gray-600 my-6">
 
                         <div class="position sm:col-span-3">
-                            <label for="position" class="block text-sm/6 font-medium text-black mt-2 ml-2">->
+                            <label for="position" class="block text-sm/6 font-medium text-white mt-2 ml-2">->
                                 Position</label>
                             <div class="mt-2">
                                 <select id="position" name="position"
@@ -136,7 +138,7 @@
                         <hr class="border-gray-600 my-6">
 
                         <div class="nationality sm:col-span-4">
-                            <label for="nationality" class="block text-sm/6 font-medium text-black mt-2 ml-2">-> Name</label>
+                            <label for="nationality" class="block text-sm/6 font-medium text-white mt-2 ml-2">-> Name</label>
                             <div class="form-name mt-2" style="width: 320px; margin-left: 15px;padding-bottom: 20px;">
                                   <div class="flex rounded-md bg-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                       <input type="text" name="nationality" id="nationality"
@@ -149,7 +151,7 @@
 
                         <div class="flag col-span-full flex items-center space-x-10">
                                 <div>
-                                    <label for="flag" class="block text-sm font-medium text-black ml-2 mb-7">
+                                    <label for="flag" class="block text-sm font-medium text-white ml-2 mb-7">
                                         -> Flag
                                     </label>
                                     <div class="ml-4 mb-7">
@@ -171,7 +173,7 @@
                         <hr class="border-gray-600 my-6">
 
                         <div class="club sm:col-span-4">
-                            <label for="club" class="block text-sm/6 font-medium text-black mt-2 ml-2">-> Club</label>
+                            <label for="club" class="block text-sm/6 font-medium text-white mt-2 ml-2">-> Club</label>
                             <div class="mt-2" style="width: 320px; margin-left: 15px;padding-bottom: 20px;">
                                 <div
                                     class="flex rounded-md bg-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -185,7 +187,7 @@
 
                         <div class="logo col-span-full flex items-center space-x-10">
                                 <div>
-                                    <label for="logo" class="block text-sm font-medium text-black ml-2 mb-7">
+                                    <label for="logo" class="block text-sm font-medium text-white ml-2 mb-7">
                                         -> Logo
                                     </label>
                                     <div class="ml-4 mb-7">
@@ -199,17 +201,17 @@
                                         >
                                     </div>
                                 </div>
-                                <div id="FlagPreview" class="w-24 h-24 rounded-lg border border-dashed flex items-center justify-center bg-gray-100 text-gray-400 mt-2" style="margin-right:35px; width: 100px;">
+                                <div id="logoPreview" class="w-24 h-24 rounded-lg border border-dashed flex items-center justify-center bg-gray-100 text-gray-400 mt-2" style="margin-right:35px; width: 100px;">
                                     <span class="text-sm">No Logo</span>
                                 </div>
                         </div>
 
                         <hr class="border-gray-600 my-6">
 
-                        <div class="NR-player flex space-x-10 mt-10">
+                        <div class="NR-player flex space-x-10 mt-10" id="nr-player-section" style="display: none;">
 
                             <div class="pace sm:col-span-3">
-                                <label for="pace" class="block text-sm/6 font-medium text-black">Pace</label>
+                                <label for="pace" class="block text-sm/6 font-medium text-white">Pace</label>
                                 <div class="mt-2">
                                     <input type="number" name="pace" id="pace" min="1" max="100" required
                                         class="block bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 text-gray-900 shadow-sm w-14 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -217,7 +219,7 @@
                             </div>
 
                             <div class="shooting sm:col-span-3">
-                                <label for="shooting" class="block text-sm/6 font-medium text-black">Shooting</label>
+                                <label for="shooting" class="block text-sm/6 font-medium text-white">Shooting</label>
                                 <div class="mt-2">
                                     <input type="number" name="shooting" id="shooting" min="1" max="100" required
                                         class="block w-14 bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -225,7 +227,7 @@
                             </div>
 
                             <div class="passing sm:col-span-3">
-                                <label for="passing" class="block text-sm/6 font-medium text-black">Passing</label>
+                                <label for="passing" class="block text-sm/6 font-medium text-white">Passing</label>
                                 <div class="mt-2">
                                     <input type="number" name="passing" id="passing" min="1" max="100" required
                                         class="block w-14 bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -233,7 +235,7 @@
                             </div>
 
                             <div class="dribbling sm:col-span-3">
-                                <label for="dribbling" class="block text-sm/6 font-medium text-black">Dribbling</label>
+                                <label for="dribbling" class="block text-sm/6 font-medium text-white">Dribbling</label>
                                 <div class="mt-2">
                                     <input type="number" name="dribbling" id="dribbling" min="1" max="100" required
                                         class="block w-14 bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -241,7 +243,7 @@
                             </div>
 
                             <div class="defending sm:col-span-3">
-                                <label for="defending" class="block text-sm/6 font-medium text-black">Defending</label>
+                                <label for="defending" class="block text-sm/6 font-medium text-white">Defending</label>
                                 <div class="mt-2">
                                     <input type="number" name="defending" id="defending" min="1" max="100" required
                                         class="block w-14 bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -249,7 +251,7 @@
                             </div>
 
                             <div class="physical sm:col-span-3">
-                                <label for="first-name" class="block text-sm/6 font-medium text-black">Physical</label>
+                                <label for="first-name" class="block text-sm/6 font-medium text-white">Physical</label>
                                 <div class="mt-2">
                                     <input type="number" name="physical" id="physical"
                                         class="block w-14 bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
@@ -259,10 +261,10 @@
 
                         </div>
 
-                        <div class="GOOL-Keeper flex space-x-10 mt-10">
+                        <div class="GOOL-Keeper flex space-x-10 mt-10" id="gk-section" style="display: none;">
 
                             <div class="diving sm:col-span-3">
-                                <label for="diving" class="block text-sm/6 font-medium text-black">Pace</label>
+                                <label for="diving" class="block text-sm/6 font-medium text-white">Diving</label>
                                 <div class="mt-2">
                                     <input type="number" name="diving" id="diving" min="1" max="100" required
                                         class="block bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 text-gray-900 shadow-sm w-14 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -270,7 +272,7 @@
                             </div>
 
                             <div class="handling sm:col-span-3">
-                                <label for="handling" class="block text-sm/6 font-medium text-black">Shooting</label>
+                                <label for="handling" class="block text-sm/6 font-medium text-white">Handling</label>
                                 <div class="mt-2">
                                     <input type="number" name="handling" id="handling" min="1" max="100" required
                                         class="block w-14 bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -278,7 +280,7 @@
                             </div>
 
                             <div class="kicking sm:col-span-3">
-                                <label for="kicking" class="block text-sm/6 font-medium text-black">Passing</label>
+                                <label for="kicking" class="block text-sm/6 font-medium text-white">Kicking</label>
                                 <div class="mt-2">
                                     <input type="number" name="kicking" id="kicking" min="1" max="100" required
                                         class="block w-14 bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -286,7 +288,7 @@
                             </div>
 
                             <div class="reflexes sm:col-span-3">
-                                <label for="reflexes" class="block text-sm/6 font-medium text-black">Dribbling</label>
+                                <label for="reflexes" class="block text-sm/6 font-medium text-white">Reflexes</label>
                                 <div class="mt-2">
                                     <input type="number" name="reflexes" id="reflexes" min="1" max="100" required
                                         class="block w-14 bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -294,7 +296,7 @@
                             </div>
 
                             <div class="speed sm:col-span-3">
-                                <label for="speed" class="block text-sm/6 font-medium text-black">Defending</label>
+                                <label for="speed" class="block text-sm/6 font-medium text-white">Speed</label>
                                 <div class="mt-2">
                                     <input type="number" name="speed" id="speed" min="1" max="100" required
                                         class="block w-14 bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
@@ -302,7 +304,7 @@
                             </div>
 
                             <div class="positioning sm:col-span-3">
-                                <label for="positioning" class="block text-sm/6 font-medium text-black">Physical</label>
+                                <label for="positioning" class="block text-sm/6 font-medium text-white">Positioning</label>
                                 <div class="mt-2">
                                     <input type="number" name="positioning" id="positioning"
                                         class="block w-14 bg-gray-100 text-gray-900 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
@@ -312,16 +314,50 @@
 
                         </div>
 
-                        <div class="submit h-3 mb-5">
-                            <button type="submit" class="btn rounded-full text-black border w-36 h-12">Submit</button>
+                        <div class="flex space-x-4 justify-center mt-8 h-2">
+                            <button type="button" class="btn rounded-full text-black border w-36 h-12 justify-center hover:bg-red-600" onclick="closeForm()">Close</button>
+                            <button type="submit" class="btn rounded-full text-black border w-36 h-12 justify-center hover:bg-green-600">Submit</button>
                         </div>
                     </div>
                 </form>
+                </div>
             </section>
 
         </main>
     </div>
-    <script src="../add_player.js"></script>
+    <script>
+        // Function to toggle the modal visibility
+        function toggleModal() {
+            const modal = document.getElementById('add-player-modal');
+            modal.classList.toggle('hidden');
+        }
+    </script>
+    <script>
+  document.getElementById("position").addEventListener("change", function () {
+    // Récupérer les sections
+    const nrPlayerSection = document.getElementById("nr-player-section");
+    const gkSection = document.getElementById("gk-section");
+
+    // Cacher toutes les sections par défaut
+    nrPlayerSection.style.display = "none";
+    gkSection.style.display = "none";
+
+    // Afficher la section correspondante
+    if (this.value === "GK") {
+      gkSection.style.display = "flex"; // Flex pour maintenir la disposition
+    } else {
+      nrPlayerSection.style.display = "flex";
+    }
+  });
+</script>
+<script>
+    function closeForm() {
+        document.getElementById('player-form').reset();
+        const modal = document.getElementById('add-player-modal');
+        modal.classList.add('hidden');
+    }
+</script>
+
 </body>
 
 </html>

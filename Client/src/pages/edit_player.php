@@ -2,12 +2,12 @@
 
 include "/xampp/htdocs/FUT_Champians_Backend/Server/db_connect.php";
 
-if (isset($_GET['id'])) {
-    $player_id = $_GET['id'];
+if (isset($_GET['name'])) {
+    $player_name = $_GET['name'];
     
-    $sql = "SELECT * FROM player WHERE id = ?";
+    $sql = "SELECT * FROM player WHERE name = ?";
     if ($stmt = mysqli_prepare($dbconnect, $sql)) {
-        mysqli_stmt_bind_param($stmt, "i", $player_id);
+        mysqli_stmt_bind_param($stmt, "i", $player_name);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         
