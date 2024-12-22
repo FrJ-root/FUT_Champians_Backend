@@ -45,12 +45,9 @@ if ($dbconnect->query($sql_player) === TRUE) {
         $sql_normal_player = "INSERT INTO normal_player (id,pace, shooting, passing, dribbling, defending, physical, playerID) 
                               VALUES ($playerID,$pace, $shooting, $passing, $dribbling, $defending, $physical, $playerID)";
         $dbconnect->query($sql_normal_player);
-    }
-
-    echo "Nice Add ^_0!";
+    }echo "<script>window.location.href = 'dashbord.php'</script>";
 } else {
-    echo "Error: " . $sql_player . "<br>" . $dbconnect->error;
+    echo "Error";
 }
-
 $dbconnect->close();
 ?>

@@ -21,9 +21,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             mysqli_query($dbconnect, $delete_nationality);
             mysqli_query($dbconnect, $delete_club);
 
-            // echo "<script>setTimeout(() => {
-            //        alert('Player deleted successfully!'); window.location.href='players.php'; 
-            //        }, "3000");</script>";
+            echo "<script>window.location.href = 'dashbord.php'</script>";
         } else {
             echo "Error deleting player: " . mysqli_error($dbconnect);
         }
