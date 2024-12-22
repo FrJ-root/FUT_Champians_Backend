@@ -61,7 +61,6 @@
                             <th class="px-4 py-2">Name</th>
                             <th class="px-4 py-2">Photo</th>
                             <th class="px-4 py-2">Posit</th>
-                            <th class="px-4 py-2">Statu</th>
                             <th class="px-4 py-2">Natio</th>
                             <th class="px-4 py-2">Flag</th>
                             <th class="px-4 py-2">Club</th>
@@ -75,10 +74,10 @@
                 </table>
             </section>
 
-            <section id="add-player-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+            <section id="add-player" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
                 <div class="bg-gray-900 rounded-lg shadow-lg p-6 w-1/2" style="width: 38rem;; height: 600px; overflow: scroll; scrollbar-width: none;">
                 <h2 class="text-3xl font-bold mb-4 text-center text-white">Add Player</h2>
-                <form id="player-form" action="add_player.php" method="post">
+                <form id="player-form" action="add_player.php" method="POST">
                     <div class="form border-b border-gray-900/10 pb-12">
 
                         <div class="name sm:col-span-4">
@@ -325,39 +324,8 @@
 
         </main>
     </div>
-    <script>
-        // Function to toggle the modal visibility
-        function toggleModal() {
-            const modal = document.getElementById('add-player-modal');
-            modal.classList.toggle('hidden');
-        }
-    </script>
-    <script>
-  document.getElementById("position").addEventListener("change", function () {
-    // Récupérer les sections
-    const nrPlayerSection = document.getElementById("nr-player-section");
-    const gkSection = document.getElementById("gk-section");
 
-    // Cacher toutes les sections par défaut
-    nrPlayerSection.style.display = "none";
-    gkSection.style.display = "none";
-
-    // Afficher la section correspondante
-    if (this.value === "GK") {
-      gkSection.style.display = "flex"; // Flex pour maintenir la disposition
-    } else {
-      nrPlayerSection.style.display = "flex";
-    }
-  });
-</script>
-<script>
-    function closeForm() {
-        document.getElementById('player-form').reset();
-        const modal = document.getElementById('add-player-modal');
-        modal.classList.add('hidden');
-    }
-</script>
-
+<script src="../add_player.js"></script>
 </body>
 
 </html>

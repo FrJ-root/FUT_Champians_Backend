@@ -1,37 +1,55 @@
 <?php
-include "/xampp/htdocs/FUT_Champians_Backend/Server/db_connect.php";
+include '/xampp/htdocs/FUT_Champians_Backend/Server/db_connect.php';
 
-$name = mysqli_real_escape_string($dbconnect, $_POST['name']);
-$photo = mysqli_real_escape_string($dbconnect, $_POST['photo']);
-$position = mysqli_real_escape_string($dbconnect, $_POST['position']);
-$nationality = mysqli_real_escape_string($dbconnect, $_POST['nationality']);
-$flag= mysqli_real_escape_string($dbconnect, $_POST['flag']);
-$club = mysqli_real_escape_string($dbconnect, $_POST['club']);
-$logo = mysqli_real_escape_string($dbconnect, $_POST['logo']);
-$pace = mysqli_real_escape_string($dbconnect, $_POST['pace']);
-$shooting = mysqli_real_escape_string($dbconnect, $_POST['shooting']);
-$passing = mysqli_real_escape_string($dbconnect, $_POST['passing']);
-$dribbling = mysqli_real_escape_string($dbconnect, $_POST['dribbling']);
-$defending = mysqli_real_escape_string($dbconnect, $_POST['defending']);
-$physical = mysqli_real_escape_string($dbconnect, $_POST['physical']);
-$diving = mysqli_real_escape_string($dbconnect, $_POST['diving']);
-$handling = mysqli_real_escape_string($dbconnect, $_POST['handling']);
-$kicking = mysqli_real_escape_string($dbconnect, $_POST['kicking']);
-$reflexes = mysqli_real_escape_string($dbconnect, $_POST['reflexes']);
-$speed = mysqli_real_escape_string($dbconnect, $_POST['speed']);
-$positioning = mysqli_real_escape_string($dbconnect, $_POST['positioning']);
+$name = $_POST['name'];
+$photo = $_POST['photo'];
+$position = $_POST['position'];
+$nationality = $_POST['nationality'];
+$flag = $_POST['flag'];
+$club = $_POST['club'];
+$logo = $_POST['logo'];
 
-$sql1 = "INSERT INTO player(name, photo, position) VALUES ('$name', '$photo', '$position')";
-$sql2 = "INSERT INTO nationality(nationality, flag) VALUES ('$nationality', '$flag')";
-$sql3 = "INSERT INTO club(club, logo) VALUES ('$club', '$logo')";
-$sql4 = "INSERT INTO normal_player(pace, shooting, passing, dribbling, defending, physical) VALUES ('$pace', '$shooting', '$passing', '$dribbling', '$defending', '$physical')";
-$sql5 = "INSERT INTO gk_player(diving, handling, kicking, reflexes, speed, positioning) VALUES ('$diving', '$handling', '$kicking', '$reflexes', '$speed', '$positioning')";
+$sql_nationality = "INSERT INTO nationality (nationality, flag) VALUES ('$nationality', '$flag')";
+$dbconnect->query($sql_nationality);
+$nationalityID = $dbconnect->insert_id;
 
-if(mysqli_query($dbconnect, $sql1) && mysqli_query($dbconnect, $sql2) && mysqli_query($dbconnect, $sql3) && mysqli_query($dbconnect, $sql4) && mysqli_query($dbconnect, $sql5)) {
-    echo "Nice Add ^_0";
+$sql_club = "INSERT INTO club (club, logo) VALUES ('$club', '$logo')";
+$dbconnect->query($sql_club);
+$clubID = $dbconnect->insert_id;
+
+$sql_player = "INSERT INTO player (name, photo, position) 
+               VALUES ('$name', '$photo', '$position')";
+
+if ($dbconnect->query($sql_player) === TRUE) {
+    $playerID = $dbconnect->insert_id;
+        if ($position == 'GK') {
+        $diving = $_POST['diving'];
+        $handling = $_POST['handling'];
+        $kicking = $_POST['kicking'];
+        $reflexes = $_POST['reflexes'];
+        $speed = $_POST['speed'];
+        $positioning = $_POST['positioning'];
+
+        $sql_gk = "INSERT INTO gk_player (diving, handling, kicking, reflexes, speed, positioning) 
+                   VALUES ($diving, $handling, $kicking, $reflexes, $speed, $positioning)";
+        $dbconnect->query($sql_gk);
+    } else {
+        $pace = $_POST['pace'];
+        $shooting = $_POST['shooting'];
+        $passing = $_POST['passing'];
+        $dribbling = $_POST['dribbling'];
+        $defending = $_POST['defending'];
+        $physical = $_POST['physical'];
+
+        $sql_normal_player = "INSERT INTO normal_player (pace, shooting, passing, dribbling, defending, physical) 
+                              VALUES ($pace, $shooting, $passing, $dribbling, $defending, $physical)";
+        $dbconnect->query($sql_normal_player);
+    }
+
+    echo "Nice Add ^_0!";
 } else {
-    echo "Ooops! Couldn't execute the queries: " . mysqli_error($dbconnect);
+    echo "Error: " . $sql_player . "<br>" . $dbconnect->error;
 }
 
-mysqli_close($dbconnect);
+$dbconnect->close();
 ?>

@@ -1,3 +1,5 @@
+CREATE DATABASE fut_champians;
+USE fut_champians;
 CREATE TABLE club(
     id INT PRIMARY KEY AUTO_INCREMENT,
     club varchar(255) NOT NULL,

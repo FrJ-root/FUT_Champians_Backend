@@ -1,86 +1,93 @@
 <?php
-
 include "/xampp/htdocs/FUT_Champians_Backend/Server/db_connect.php";
 
-if (isset($_GET['name'])) {
-    $player_name = $_GET['name'];
+if(isset($_GET['id'])) {
+    $player_id = $_GET['id'];
     
-    $sql = "SELECT * FROM player WHERE name = ?";
-    if ($stmt = mysqli_prepare($dbconnect, $sql)) {
-        mysqli_stmt_bind_param($stmt, "i", $player_name);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        
-        if ($row = mysqli_fetch_assoc($result)) {
-            $name = $row['name'];
-            $photo = $row['photo'];
-            $position = $row['position'];
-            $status = $row['status'];
-            $nationality = $row['nationality'];
-            $flag = $row['flag'];
-            $club = $row['club'];
-            $logo = $row['logo'];
-        } else {
-            echo "Player not found.";
-            exit;
-        }
-
-        mysqli_stmt_close($stmt);
+    $query = "SELECT * FROM players WHERE id = :id";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([':id' => $player_id]);
+    $player = $stmt->fetch();
+    
+    if (!$player) {
+        echo "Player not found!";
+        exit;
     }
-} else {
-    echo "Player ID is missing.";
-    exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
-    $photo = $_POST['photo'];
     $position = $_POST['position'];
-    $status = $_POST['status'];
     $nationality = $_POST['nationality'];
+    $photo = $_POST['photo'];
     $flag = $_POST['flag'];
     $club = $_POST['club'];
     $logo = $_POST['logo'];
 
-    $sql = "UPDATE player SET name = ?, photo = ?, position = ?, status = ?, nationality = ?, flag = ?, club = ?, logo = ? WHERE id = ?";
-    if ($stmt = mysqli_prepare($dbconnect, $sql)) {
-        mysqli_stmt_bind_param($stmt, "ssssssssi", $name, $photo, $position, $status, $nationality, $flag, $club, $logo, $player_id);
-        if (mysqli_stmt_execute($stmt)) {
-            header("Location: /path_to_player_list_page.php?success=2");
-        } else {
-            echo "Error updating player: " . mysqli_error($dbconnect);
-        }
-        mysqli_stmt_close($stmt);
-    }
-}
+=    $query = "UPDATE players SET name = :name, position = :position, nationality = :nationality, 
+              photo = :photo, flag = :flag, club = :club, logo = :logo WHERE id = :id";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([
+        ':name' => $name,
+        ':position' => $position,
+        ':nationality' => $nationality,
+        ':photo' => $photo,
+        ':flag' => $flag,
+        ':club' => $club,
+        ':logo' => $logo,
+        ':id' => $player_id
+    ]);
 
-mysqli_close($dbconnect);
+    header("Location: players.php");
+    exit;
+}
 ?>
 
-<form method="POST" action="edit_player.php?id=<?php echo $player_id; ?>">
-    <label for="name">Name</label>
-    <input type="text" name="name" value="<?php echo $name; ?>" required>
 
-    <label for="photo">Photo</label>
-    <input type="url" name="photo" value="<?php echo $photo; ?>" required>
+<main class="flex-1 p-6">
+            <section id="edit-player" class="mb-6">
+                <h2 class="text-2xl font-bold mb-4">Edit Player</h2>
+                <form action="edit_player.php?id=<?php echo $player['id']; ?>" method="POST" class="space-y-4">
+                    <div class="mb-4">
+                        <label for="name" class="block text-white">Name</label>
+                        <input type="text" name="name" id="name" class="w-full p-2 border" value="<?php echo $player['name']; ?>" required />
+                    </div>
+                    <div class="mb-4">
+                        <label for="position" class="block text-white">Position</label>
+                        <input type="text" name="position" id="position" class="w-full p-2 border" value="<?php echo $player['position']; ?>" required />
+                    </div>
+                    <div class="mb-4">
+                        <label for="nationality" class="block text-white">Nationality</label>
+                        <input type="text" name="nationality" id="nationality" class="w-full p-2 border" value="<?php echo $player['nationality']; ?>" required />
+                    </div>
+                    <div class="mb-4">
+                        <label for="photo" class="block text-white">Photo URL</label>
+                        <input type="url" name="photo" id="photo" class="w-full p-2 border" value="<?php echo $player['photo']; ?>" required />
+                    </div>
+                    <div class="mb-4">
+                        <label for="flag" class="block text-white">Flag URL</label>
+                        <input type="url" name="flag" id="flag" class="w-full p-2 border" value="<?php echo $player['flag']; ?>" required />
+                    </div>
+                    <div class="mb-4">
+                        <label for="club" class="block text-white">Club</label>
+                        <input type="text" name="club" id="club" class="w-full p-2 border" value="<?php echo $player['club']; ?>" required />
+                    </div>
+                    <div class="mb-4">
+                        <label for="logo" class="block text-white">Logo URL</label>
+                        <input type="url" name="logo" id="logo" class="w-full p-2 border" value="<?php echo $player['logo']; ?>" required />
+                    </div>
+                    <button type="submit" class="w-full bg-green-500 text-white p-2 rounded">Save Changes</button>
+                </form>
+            </section>
+        </main>
+    </div>
 
-    <label for="position">Position</label>
-    <input type="text" name="position" value="<?php echo $position; ?>" required>
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('add-player');
+            modal.classList.toggle('hidden');
+        }
+    </script>
+</body>
 
-    <label for="status">Status</label>
-    <input type="text" name="status" value="<?php echo $status; ?>" required>
-
-    <label for="nationality">Nationality</label>
-    <input type="text" name="nationality" value="<?php echo $nationality; ?>" required>
-
-    <label for="flag">Flag</label>
-    <input type="url" name="flag" value="<?php echo $flag; ?>" required>
-
-    <label for="club">Club</label>
-    <input type="text" name="club" value="<?php echo $club; ?>" required>
-
-    <label for="logo">Logo</label>
-    <input type="url" name="logo" value="<?php echo $logo; ?>" required>
-
-    <button type="submit">Update Player</button>
-</form>
+</html>

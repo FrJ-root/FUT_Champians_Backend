@@ -1,27 +1,37 @@
 <?php
-
 include "/xampp/htdocs/FUT_Champians_Backend/Server/db_connect.php";
 
-if (isset($_GET['id'])) {
-    $player_id = $_GET['id'];
-
-    $sql = "DELETE FROM player WHERE id = ?";
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $player_id = mysqli_real_escape_string($dbconnect, $_GET['id']);
     
-    if ($stmt = mysqli_prepare($dbconnect, $sql)) {
-        mysqli_stmt_bind_param($stmt, "i", $player_id);
-        
-        if (mysqli_stmt_execute($stmt)) {
-            header("Location: /path_to_player_list_page.php?success=1");
+    $sql = "SELECT id, nationalityID, clubID FROM player WHERE id = '$player_id' LIMIT 1";
+    $result = mysqli_query($dbconnect, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $nationalityID = $row['nationalityID'];
+        $clubID = $row['clubID'];
+
+        $delete_player = "DELETE FROM player WHERE id = '$player_id'";
+
+        if (mysqli_query($dbconnect, $delete_player)) {
+            $delete_nationality = "DELETE FROM nationality WHERE id = '$nationalityID' AND NOT EXISTS (SELECT 1 FROM player WHERE nationalityID = '$nationalityID')";
+            $delete_club = "DELETE FROM club WHERE id = '$clubID' AND NOT EXISTS (SELECT 1 FROM player WHERE clubID = '$clubID')";
+
+            mysqli_query($dbconnect, $delete_nationality);
+            mysqli_query($dbconnect, $delete_club);
+
+            // echo "<script>setTimeout(() => {
+            //        alert('Player deleted successfully!'); window.location.href='players.php'; 
+            //        }, "3000");</script>";
         } else {
             echo "Error deleting player: " . mysqli_error($dbconnect);
         }
-
-        mysqli_stmt_close($stmt);
     } else {
-        echo "Error preparing the statement: " . mysqli_error($dbconnect);
+        echo "Player not found!";
     }
 } else {
-    echo "Player ID is missing.";
+    echo "Invalid request!";
 }
 
 mysqli_close($dbconnect);
