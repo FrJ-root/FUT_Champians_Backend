@@ -8,8 +8,8 @@ if (!$dbconnect) {
 
 $sql = "SELECT player.id, player.name, player.photo, player.position, nationality.nationality, nationality.flag, club.club, club.logo
 FROM player
-INNER JOIN nationality ON player.id = nationality.id
-INNER JOIN club ON player.id = club.id";
+INNER JOIN nationality ON player.nationalityID = nationality.id
+INNER JOIN club ON player.clubID = club.id";
 
 $result = mysqli_query($dbconnect, $sql);
 

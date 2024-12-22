@@ -22,25 +22,24 @@ CREATE table player(
     FOREIGN KEY (clubID) REFERENCES club(id)
 );
 create table gk_player(
-    id int PRIMARY KEY AUTO_INCREMENT,
+    playerID int PRIMARY KEY,
     diving int NOT NULL,
     handling int NOT NULL,
     kicking int NOT NULL,
     reflexes int NOT NULL,
     speed int NOT NULL,
     positioning int NOT NULL,
-    playerID int,
-    FOREIGN KEY (playerID) REFERENCES player(id)
+    FOREIGN KEY (playerID) REFERENCES player(id) ON DELETE FROM tableName
+    WHERE whereClause ;
 );
 create table normal_player(
-    id int PRIMARY KEY AUTO_INCREMENT,
+    playerID int PRIMARY KEY,
     pace int NOT NULL,
     shooting int NOT NULL,
     passing int NOT NULL,
     dribbling int NOT NULL,
     defending int NOT NULL,
     physical int NOT NULL,
-    playerID int,
     FOREIGN KEY (playerID) REFERENCES player(id)
 );
 
